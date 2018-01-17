@@ -62,6 +62,7 @@
     	a.id,
     	a.company_id AS "company.id",
     	a.office_id AS "office.id",
+    	a.team_id AS "team.id",
     	a.login_name,
     	a.password,
     	a.no,
@@ -90,6 +91,9 @@
     	o.name AS "office.name",
     	o.parent_id AS "office.parent.id",
     	o.parent_ids AS "office.parentIds",
+    	t.name AS "team.name",
+    	t.parent_id AS "team.parent.id",
+    	t.parent_ids AS "team.parentIds",
     	oa.id AS "office.area.id",
     	oa.name AS "office.area.name",
     	oa.parent_id AS "office.area.parent.id",
@@ -114,6 +118,7 @@
 		LEFT JOIN sys_office c ON c.id = a.company_id
 		LEFT JOIN sys_area ca ON ca.id = c.area_id
 		LEFT JOIN sys_office o ON o.id = a.office_id
+		LEFT JOIN sys_office t ON t.id = a.team_id
 		LEFT JOIN sys_area oa ON oa.id = o.area_id
 		LEFT JOIN sys_user cu ON cu.id = c.primary_person
 		LEFT JOIN sys_user cu2 ON cu2.id = c.deputy_person
@@ -167,6 +172,13 @@
 					<if test="dbName == 'mssql'">'%,'+#{office.id}+',%')</if>
 					<if test="dbName == 'mysql'">CONCAT('%,', #{office.id}, ',%'))</if>
 		</if>
+		<!-- 新增班组查询 -->
+		<if test="team != null and team.id != null and team.id != ''">
+			AND (t.id = #{team.id} OR t.parent_ids LIKE 
+					<if test="dbName == 'oracle'">'%,'||#{team.id}||',%')</if>
+					<if test="dbName == 'mssql'">'%,'+#{team.id}+',%')</if>
+					<if test="dbName == 'mysql'">CONCAT('%,', #{team.id}, ',%'))</if>
+		</if>
 		<!-- 如果不是超级管理员，则不显示超级管理员用户 -->
 		<if test="!currentUser.admin">
 			AND a.id != '1'
@@ -202,6 +214,7 @@
 		FROM sys_user a
 		WHERE a.del_flag = #{DEL_FLAG_NORMAL}
 			AND a.office_id = #{office.id}
+			AND a.team_id = #{team.id}
 		ORDER BY a.name
 	</select>
 	
@@ -228,7 +241,8 @@
 		INSERT INTO sys_user(
 			id, 
 			company_id, 
-			office_id, 
+			office_id,
+			team_id 
 			login_name, 
 			password, 
 			no, 
@@ -248,7 +262,8 @@
 		) VALUES (
 			#{id}, 
 			#{company.id}, 
-			#{office.id}, 
+			#{office.id},
+			#{team.id},  
 			#{loginName}, 
 			#{password}, 
 			#{no}, 
@@ -273,6 +288,7 @@
 		UPDATE sys_user SET 
 			company_id = #{company.id}, 
 			office_id = #{office.id}, 
+			team_id = #{team.id}, 
 			login_name = #{loginName}, 
 			password = #{password}, 
 			no = #{no}, 

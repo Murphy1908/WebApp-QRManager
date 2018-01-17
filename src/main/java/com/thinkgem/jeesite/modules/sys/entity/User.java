@@ -31,6 +31,7 @@ public class User extends DataEntity<User> {
 	private static final long serialVersionUID = 1L;
 	private Office company;	// 归属公司
 	private Office office;	// 归属部门
+	private Office team;	//小组
 	private String loginName;// 登录名
 	private String password;// 密码
 	private String no;		// 工号
@@ -115,6 +116,15 @@ public class User extends DataEntity<User> {
 
 	public void setOffice(Office office) {
 		this.office = office;
+	}
+
+	
+	public Office getTeam() {
+		return team;
+	}
+
+	public void setTeam(Office team) {
+		this.team = team;
 	}
 
 	@Length(min=1, max=100, message="登录名长度必须介于 1 和 100 之间")
