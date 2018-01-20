@@ -39,6 +39,9 @@ public class User extends DataEntity<User> {
 	private String email;	// 邮箱
 	private String phone;	// 电话
 	private String mobile;	// 手机
+	private String cardCode;//胸牌二维码
+	private String tagCode;	//名牌二维码
+	private String postsId;	//职位ID(数据字典)
 	private String userType;// 用户类型
 	private String loginIp;	// 最后登陆IP
 	private Date loginDate;	// 最后登陆日期
@@ -196,6 +199,30 @@ public class User extends DataEntity<User> {
 
 	public void setMobile(String mobile) {
 		this.mobile = mobile;
+	}
+
+	public String getCardCode() {
+		return cardCode;
+	}
+
+	public void setCardCode(String cardCode) {
+		this.cardCode = cardCode;
+	}
+
+	public String getTagCode() {
+		return tagCode;
+	}
+
+	public void setTagCode(String tagCode) {
+		this.tagCode = tagCode;
+	}
+
+	public String getPostsId() {
+		return postsId;
+	}
+
+	public void setPostsId(String postsId) {
+		this.postsId = postsId;
 	}
 
 	@ExcelField(title="备注", align=1, sort=900)

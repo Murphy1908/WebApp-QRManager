@@ -20,7 +20,7 @@
 		</div>
 		<div id="openClose" class="close">&nbsp;</div>
 		<div id="right">
-			<iframe id="officeContent" src="${ctx}/sys/user/list" width="100%" height="91%" frameborder="0"></iframe>
+			<iframe id="officeContent" src="${ctx}/sys/user/listtag" width="100%" height="91%" frameborder="0"></iframe>
 		</div>
 	</div>
 	<script type="text/javascript">
@@ -30,9 +30,9 @@
 					//$('#officeContent').attr("src","${ctx}/sys/user/list?office.id="+id+"&office.name="+treeNode.name);
 					if( treeNode.isParent ){
 						debugger;
-						$('#officeContent').attr("src","${ctx}/sys/user/list?office.id="+id+"&office.name="+treeNode.name);
+						$('#officeContent').attr("src","${ctx}/sys/user/listtag?office.id="+id+"&office.name="+treeNode.name);
 					}else{
-						$('#officeContent').attr("src","${ctx}/sys/user/list?&team.id="+id+"&team.name="+treeNode.name);
+						$('#officeContent').attr("src","${ctx}/sys/user/listtag?&team.id="+id+"&team.name="+treeNode.name);
 					}
 					
 				}

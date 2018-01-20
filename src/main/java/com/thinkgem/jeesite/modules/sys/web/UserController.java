@@ -348,6 +348,20 @@ public class UserController extends BaseController {
 		return mapList;
 	}
     
+	
+	//@RequiresPermissions("sys:user:view")
+	@RequestMapping(value = "indextag")
+	public String indextag(User user, Model model) {
+		return "modules/qrcode/usertagIndex";
+	}
+	
+	//@RequiresPermissions("sys:user:view")
+	@RequestMapping(value = "listtag")
+	public String listtag(User user, HttpServletRequest request, HttpServletResponse response, Model model) {
+		Page<User> page = systemService.findUser(new Page<User>(request, response), user);
+        model.addAttribute("page", page);
+		return "modules/qrcode/usertagList";
+	}
 //	@InitBinder
 //	public void initBinder(WebDataBinder b) {
 //		b.registerCustomEditor(List.class, "roleList", new PropertyEditorSupport(){

@@ -52,6 +52,12 @@
 				<label class="lbl">${user.office.name}</label>
 			</div>
 		</div>
+				<div class="control-group">
+			<label class="control-label">归属班组:</label>
+			<div class="controls">
+				<label class="lbl">${user.team.name}</label>
+			</div>
+		</div>
 		<div class="control-group">
 			<label class="control-label">姓名:</label>
 			<div class="controls">
