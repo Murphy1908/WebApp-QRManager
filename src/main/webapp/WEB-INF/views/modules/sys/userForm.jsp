@@ -141,6 +141,18 @@
 			</div>
 		</div>
 		<div class="control-group">
+			<label class="control-label">胸牌码</label>
+			<div class="controls">
+				<form:input path="cardCode" htmlEscape="false" maxlength="100"/>
+			</div>
+		</div>
+		<div class="control-group">
+			<label class="control-label">名牌码</label>
+			<div class="controls">
+				<form:input path="tagCode" htmlEscape="false" maxlength="100"/>
+			</div>
+		</div>
+		<div class="control-group">
 			<label class="control-label">是否允许登录:</label>
 			<div class="controls">
 				<form:select path="loginFlag">

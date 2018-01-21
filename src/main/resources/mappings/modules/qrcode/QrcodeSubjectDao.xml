@@ -50,6 +50,12 @@
 					<if test="dbName == 'mssql'">'%'+#{name}+'%'</if>
 					<if test="dbName == 'mysql'">concat('%',#{name},'%')</if>
 			</if>
+			<if test="type != null and type != ''">
+				AND a.type LIKE 
+					<if test="dbName == 'oracle'">'%'||#{type}||'%'</if>
+					<if test="dbName == 'mssql'">'%'+#{type}+'%'</if>
+					<if test="dbName == 'mysql'">concat('%',#{type},'%')</if>
+			</if>
 		</where>
 		ORDER BY a.sort ASC
 	</select>

@@ -32,7 +32,7 @@
 						debugger;
 						$('#officeContent').attr("src","${ctx}/sys/user/listtag?office.id="+id+"&office.name="+treeNode.name);
 					}else{
-						$('#officeContent').attr("src","${ctx}/sys/user/listtag?&team.id="+id+"&team.name="+treeNode.name);
+						$('#officeContent').attr("src","${ctx}/sys/user/listtag?team.id="+id+"&team.name="+treeNode.name);
 					}
 					
 				}

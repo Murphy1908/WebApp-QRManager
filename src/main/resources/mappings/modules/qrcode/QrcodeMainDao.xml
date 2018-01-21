@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.thinkgem.jeesite.modules.qrcode.dao.QrcodeMainDao">
+    
+	<sql id="qrcodeMainColumns">
+		a.id AS "id",
+		a.user_id AS "user.id",
+		a.office_id AS "office.id",
+		a.team_id AS "team.id",
+		a.subjectmain_id AS "subjectmain.id",
+		a.subjectbranch_id AS "subjectbranch.id",
+		a.name AS "name",
+		a.location AS "location",
+		a.subject_code AS "subjectCode",
+		a.in_date AS "inDate",
+		a.create_by AS "createBy.id",
+		a.create_date AS "createDate",
+		a.update_by AS "updateBy.id",
+		a.update_date AS "updateDate",
+		a.remarks AS "remarks",
+		a.del_flag AS "delFlag",
+		u2.name AS "user.name",
+		o3.name AS "office.name"
+	</sql>
+	
+	<sql id="qrcodeMainJoins">
+		LEFT JOIN sys_user u2 ON u2.id = a.user_id
+		LEFT JOIN sys_office o3 ON o3.id = a.office_id
+		LEFT JOIN sys_office o4 ON o4.id = a.team_id
+	</sql>
+    
+	<select id="get" resultType="QrcodeMain">
+		SELECT 
+			<include refid="qrcodeMainColumns"/>
+		FROM qrcode_main a
+		<include refid="qrcodeMainJoins"/>
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="findList" resultType="QrcodeMain">
+		SELECT 
+			<include refid="qrcodeMainColumns"/>
+		FROM qrcode_main a
+		<include refid="qrcodeMainJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+			<if test="name != null and name != ''">
+				AND a.name LIKE 
+					<if test="dbName == 'oracle'">'%'||#{name}||'%'</if>
+					<if test="dbName == 'mssql'">'%'+#{name}+'%'</if>
+					<if test="dbName == 'mysql'">concat('%',#{name},'%')</if>
+			</if>
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="findAllList" resultType="QrcodeMain">
+		SELECT 
+			<include refid="qrcodeMainColumns"/>
+		FROM qrcode_main a
+		<include refid="qrcodeMainJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO qrcode_main(
+			id,
+			user_id,
+			office_id,
+			team_id,
+			subjectmain_id,
+			subjectbranch_id,
+			name,
+			location,
+			subject_code,
+			in_date,
+			create_by,
+			create_date,
+			update_by,
+			update_date,
+			remarks,
+			del_flag
+		) VALUES (
+			#{id},
+			#{user.id},
+			#{office.id},
+			#{team.id},
+			#{subjectmain.id},
+			#{subjectbranch.id},
+			#{name},
+			#{location},
+			#{subjectCode},
+			#{inDate},
+			#{createBy.id},
+			#{createDate},
+			#{updateBy.id},
+			#{updateDate},
+			#{remarks},
+			#{delFlag}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE qrcode_main SET 	
+			user_id = #{user.id},
+			office_id = #{office.id},
+			team_id = #{team.id},
+			subjectmain_id = #{subjectmain.id},
+			subjectbranch_id = #{subjectbranch.id},
+			name = #{name},
+			location = #{location},
+			subject_code = #{subjcectCode},
+			in_date = #{inDate},
+			update_by = #{updateBy.id},
+			update_date = #{updateDate},
+			remarks = #{remarks}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="delete">
+		UPDATE qrcode_main SET 
+			del_flag = #{DEL_FLAG_DELETE}
+		WHERE id = #{id}
+	</update>
+	
+</mapper>

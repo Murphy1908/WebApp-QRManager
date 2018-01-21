@@ -106,9 +106,13 @@ public class QrcodeSubjectController extends BaseController {
 	@RequiresPermissions("user")
 	@ResponseBody
 	@RequestMapping(value = "treeData")
-	public List<Map<String, Object>> treeData(@RequestParam(required=false) String extId, HttpServletResponse response) {
+	public List<Map<String, Object>> treeData(@RequestParam(required=false) String extId, @RequestParam(required=false) String type, HttpServletResponse response) {
 		List<Map<String, Object>> mapList = Lists.newArrayList();
-		List<QrcodeSubject> list = qrcodeSubjectService.findList(new QrcodeSubject());
+		QrcodeSubject qrcodeSubject = new QrcodeSubject();
+		if( "1".equals(type) ){
+			qrcodeSubject.setType(type);
+		}		
+		List<QrcodeSubject> list = qrcodeSubjectService.findList(qrcodeSubject);
 		for (int i=0; i<list.size(); i++){
 			QrcodeSubject e = list.get(i);
 			if (StringUtils.isBlank(extId) || (extId!=null && !extId.equals(e.getId()) && e.getParentIds().indexOf(","+extId+",")==-1)){

@@ -111,7 +111,7 @@ public class OfficeController extends BaseController {
 				childOffice.setName(DictUtils.getDictLabel(id, "sys_office_common", "未知"));
 				childOffice.setParent(office);
 				childOffice.setArea(office.getArea());
-				childOffice.setType(String.valueOf(Integer.valueOf(office.getType())+1));
+				childOffice.setType(String.valueOf(Integer.valueOf(office.getType())));
 				//childOffice.setType("2");
 				childOffice.setGrade(String.valueOf(Integer.valueOf(office.getGrade())+1));
 				childOffice.setUseable(Global.YES);
