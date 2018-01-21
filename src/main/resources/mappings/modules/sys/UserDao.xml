@@ -245,7 +245,7 @@
 			id, 
 			company_id, 
 			office_id,
-			team_id 
+			team_id, 
 			login_name, 
 			password, 
 			no, 

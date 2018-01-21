@@ -362,6 +362,18 @@ public class UserController extends BaseController {
         model.addAttribute("page", page);
 		return "modules/qrcode/usertagList";
 	}
+	
+	@RequestMapping(value = "indexcard")
+	public String indexcard(User user, Model model) {
+		return "modules/qrcode/usercardIndex";
+	}
+	
+	@RequestMapping(value = "listcard")
+	public String listcard(User user, HttpServletRequest request, HttpServletResponse response, Model model) {
+		Page<User> page = systemService.findUser(new Page<User>(request, response), user);
+        model.addAttribute("page", page);
+		return "modules/qrcode/usercardList";
+	}
 //	@InitBinder
 //	public void initBinder(WebDataBinder b) {
 //		b.registerCustomEditor(List.class, "roleList", new PropertyEditorSupport(){
