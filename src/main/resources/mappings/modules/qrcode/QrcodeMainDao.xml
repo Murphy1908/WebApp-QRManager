@@ -20,13 +20,18 @@
 		a.remarks AS "remarks",
 		a.del_flag AS "delFlag",
 		u2.name AS "user.name",
-		o3.name AS "office.name"
+		o3.name AS "office.name",
+		o4.name AS "team.name",
+		q1.name AS "subjectmain.name",
+		q2.name AS "subjectbranch.name"
 	</sql>
 	
 	<sql id="qrcodeMainJoins">
 		LEFT JOIN sys_user u2 ON u2.id = a.user_id
 		LEFT JOIN sys_office o3 ON o3.id = a.office_id
 		LEFT JOIN sys_office o4 ON o4.id = a.team_id
+		LEFT JOIN qrcode_subject q1 ON q1.id = a.subjectmain_id
+		LEFT JOIN qrcode_subject q2 ON q2.id = a.subjectbranch_id
 	</sql>
     
 	<select id="get" resultType="QrcodeMain">
@@ -126,7 +131,7 @@
 			subjectbranch_id = #{subjectbranch.id},
 			name = #{name},
 			location = #{location},
-			subject_code = #{subjcectCode},
+			subject_code = #{subjectCode},
 			in_date = #{inDate},
 			update_by = #{updateBy.id},
 			update_date = #{updateDate},

@@ -217,7 +217,14 @@
 		FROM sys_user a
 		WHERE a.del_flag = #{DEL_FLAG_NORMAL}
 			AND a.office_id = #{office.id}
-			AND a.team_id = #{team.id}
+			<!-- 
+			<if test="team.id != null and team.id != ''">
+			AND a.team_id like 
+					<if test="dbName == 'oracle'">'%'||#{team.id}||'%'</if>
+					<if test="dbName == 'mssql'">'%'+#{team.id}+'%'</if>
+					<if test="dbName == 'mysql'">CONCAT('%', #{team.id}, '%')</if>
+			</if>
+			 -->
 		ORDER BY a.name
 	</select>
 	

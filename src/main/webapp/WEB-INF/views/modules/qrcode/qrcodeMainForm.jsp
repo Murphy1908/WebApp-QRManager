@@ -37,7 +37,7 @@
 			<label class="control-label">归属用户：</label>
 			<div class="controls">
 				<sys:treeselect id="user" name="user.id" value="${qrcodeMain.user.id}" labelName="user.name" labelValue="${qrcodeMain.user.name}"
-					title="用户" url="/sys/office/treeData?type=3" cssClass="" allowClear="true" notAllowSelectParent="true" isAll="true"/>
+					title="用户" url="/sys/office/treeData?type=3" cssClass="" allowClear="true" notAllowSelectParent="true"/>
 			</div>
 		</div>
 		<div class="control-group">
@@ -50,21 +50,21 @@
 		<div class="control-group">
 			<label class="control-label">归属班组：</label>
 			<div class="controls">
-				<sys:treeselect id="team" name="team.id" value="${qrcodeMain.team.id}" labelName="" labelValue="${qrcodeMain.team.id}"
+				<sys:treeselect id="team" name="team.id" value="${qrcodeMain.team.id}" labelName="team.name" labelValue="${qrcodeMain.team.name}"
 					title="班组" url="/sys/office/treeData?type=2" cssClass="" allowClear="true" notAllowSelectParent="true"/>
 			</div>
 		</div>
 		<div class="control-group">
 			<label class="control-label">主分类：</label>
 			<div class="controls">
-			<sys:treeselect id="subjectmain" name="subjectmain.id" value="${qrcodeMain.subjectmain.id}" labelName="" labelValue="${qrcodeMain.subjectmain.id}"
+			<sys:treeselect id="subjectmain" name="subjectmain.id" value="${qrcodeMain.subjectmain.id}" labelName="subjectmain.name" labelValue="${qrcodeMain.subjectmain.name}"
 					title="物品分类" url="/qrcode/qrcodeSubject/treeData?type=1" cssClass="" allowClear="true" notAllowSelectParent="true"/>
 			</div>
 		</div>
 		<div class="control-group">
 			<label class="control-label">子分类：</label>
 			<div class="controls">
-			<sys:treeselect id="subjectbranch" name="subjectbranch.id" value="${qrcodeMain.subjectbranch.id}" labelName="" labelValue="${qrcodeMain.subjectbranch.id}"
+			<sys:treeselect id="subjectbranch" name="subjectbranch.id" value="${qrcodeMain.subjectbranch.id}" labelName="subjectbranch.name" labelValue="${qrcodeMain.subjectbranch.name}"
 					title="物品分类" url="/qrcode/qrcodeSubject/treeData?type=2" cssClass="" allowClear="true" notAllowSelectParent="true"/>
 			</div>
 		</div>

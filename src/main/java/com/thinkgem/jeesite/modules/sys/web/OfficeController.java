@@ -26,6 +26,7 @@ import com.thinkgem.jeesite.common.web.BaseController;
 import com.thinkgem.jeesite.modules.sys.entity.Office;
 import com.thinkgem.jeesite.modules.sys.entity.User;
 import com.thinkgem.jeesite.modules.sys.service.OfficeService;
+import com.thinkgem.jeesite.modules.sys.service.SystemService;
 import com.thinkgem.jeesite.modules.sys.utils.DictUtils;
 import com.thinkgem.jeesite.modules.sys.utils.UserUtils;
 
@@ -40,6 +41,9 @@ public class OfficeController extends BaseController {
 
 	@Autowired
 	private OfficeService officeService;
+	
+	@Autowired
+	private SystemService userService;
 	
 	@ModelAttribute("office")
 	public Office get(@RequestParam(required=false) String id) {
@@ -170,6 +174,46 @@ public class OfficeController extends BaseController {
 					map.put("isParent", true);
 				}
 				mapList.add(map);
+			}
+		}
+		return mapList;
+	}
+	
+	@RequiresPermissions("user")
+	@ResponseBody
+	@RequestMapping(value = "usertreeData")
+	public List<Map<String, Object>> usertreeData(@RequestParam(required=false) String extId, @RequestParam(required=false) String type,
+			@RequestParam(required=false) Long grade, @RequestParam(required=false) Boolean isAll, HttpServletResponse response) {
+		List<Map<String, Object>> mapList = Lists.newArrayList();
+		List<Office> list = officeService.findList(isAll);
+		for (int i=0; i<list.size(); i++){
+			Office e = list.get(i);
+			if ((StringUtils.isBlank(extId) || (extId!=null && !extId.equals(e.getId()) && e.getParentIds().indexOf(","+extId+",")==-1))
+					&& (type == null || (type != null && (type.equals("1") ? type.equals(e.getType()) : true)))
+					&& (grade == null || (grade != null && Integer.parseInt(e.getGrade()) <= grade.intValue()))
+					&& Global.YES.equals(e.getUseable())){
+				Map<String, Object> map = Maps.newHashMap();
+				map.put("id", e.getId());
+				map.put("pId", e.getParentId());
+				map.put("pIds", e.getParentIds());
+				map.put("name", e.getName());
+				if (type != null && "3".equals(type)){
+					map.put("isParent", true);
+				}
+				mapList.add(map);
+				/*
+				List<User> listuser = userService.findUserByOfficeId(e.getId());
+				for( int index = 0; index<listuser.size(); index++ ){
+					if( e.getId().equals(listuser.get(index).getTeam().getId()) ){
+						Map<String, Object> usermap = Maps.newHashMap();
+						usermap.put("id", listuser.get(index).getId());
+						usermap.put("pId", e.getId());
+						usermap.put("pIds", e.getParentIds()+listuser.get(index).getId());
+						usermap.put("name", listuser.get(index).getName());
+						mapList.add(usermap);
+					}	
+				}	
+				*/	
 			}
 		}
 		return mapList;

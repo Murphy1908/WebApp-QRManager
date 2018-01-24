@@ -53,7 +53,7 @@ public class QrcodeMain extends DataEntity<QrcodeMain> {
 		this.office = office;
 	}
 	
-	@Length(min=0, max=64, message="归属班组长度必须介于 0 和 64 之间")
+	//@Length(min=0, max=64, message="归属班组长度必须介于 0 和 64 之间")
 	public Office getTeam() {
 		return team;
 	}
@@ -62,7 +62,7 @@ public class QrcodeMain extends DataEntity<QrcodeMain> {
 		this.team = team;
 	}
 	
-	@Length(min=0, max=64, message="主分类ID长度必须介于 0 和 64 之间")
+	//@Length(min=0, max=64, message="主分类ID长度必须介于 0 和 64 之间")
 	public QrcodeSubject getSubjectmain() {
 		return subjectmain;
 	}
@@ -71,7 +71,7 @@ public class QrcodeMain extends DataEntity<QrcodeMain> {
 		this.subjectmain = subjectmain;
 	}
 	
-	@Length(min=0, max=64, message="子分类ID长度必须介于 0 和 64 之间")
+	//@Length(min=0, max=64, message="子分类ID长度必须介于 0 和 64 之间")
 	public QrcodeSubject getSubjectbranch() {
 		return subjectbranch;
 	}
@@ -80,7 +80,7 @@ public class QrcodeMain extends DataEntity<QrcodeMain> {
 		this.subjectbranch = subjectbranch;
 	}
 	
-	@Length(min=0, max=100, message="名称长度必须介于 0 和 100 之间")
+	//@Length(min=0, max=100, message="名称长度必须介于 0 和 100 之间")
 	public String getName() {
 		return name;
 	}
